@@ -10,14 +10,18 @@ public class CountdownController : MonoBehaviour
     public Canvas ControlsCanvas;
 
     private GameController_G GameController;
-    void Start()
+
+    public void StartCountdown()
     {
-        if (this.GetComponent<GameController_G>() != null) {
+        if (this.GetComponent<GameController_G>() != null)
+        {
             GameController = this.GetComponent<GameController_G>();
-        } else return;
+        }
+        else return;
 
         //GameController.SetPlayerControllersActive(false);
         StartCoroutine(CountdownToStart());
+
     }
 
     IEnumerator CountdownToStart()
@@ -32,9 +36,10 @@ public class CountdownController : MonoBehaviour
 
         CountdownDisplay.text = "GO!";
         GameController.BeginGame();
+        ControlsCanvas.gameObject.SetActive(false);
         yield return new WaitForSeconds(1.5f);
         CountdownDisplay.gameObject.SetActive(false);
-        ControlsCanvas.gameObject.SetActive(false);
+
 
     }
 }
