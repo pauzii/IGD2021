@@ -22,25 +22,43 @@ public class WeaponSystem : MonoBehaviour
     public int Level;
     private bool LevelSet = false;
     private float Cooldown;
+
+    private GameController_G GameController;
     private void Awake()
     {
         SoundEffect = GetComponent<AudioSource>();
     }
+    void Start()
+    {
+        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+        if (gameControllerObject != null)
+        {
+            GameController = gameControllerObject.GetComponent<GameController_G>();
+        }
+        if (GameController == null)
+        {
+            Debug.Log("Cannot find 'GameController' script");
+            return;
+        }
+    }
 
     void Update()
     {
-        FireRateCounter += Time.deltaTime;
-        TimeCounter += Time.deltaTime;
-        if ((int) TimeCounter % TimeUntilLvlUp == 0 && LevelSet == false) // Set the level every 60 Seconds up
+        if (GameController.GetGamePlaying())
         {
-            Level += 1;
-            LevelSet = true;
-            
-        }
-        // Debug.Log((int) TimeCounter % 2);
-        if ((int) TimeCounter % 2 == 1)
-        {
-            LevelSet = false;
+            FireRateCounter += Time.deltaTime;
+            TimeCounter += Time.deltaTime;
+            if ((int)TimeCounter % TimeUntilLvlUp == 0 && LevelSet == false) // Set the level every 60 Seconds up
+            {
+                Level += 1;
+                LevelSet = true;
+
+            }
+            // Debug.Log((int) TimeCounter % 2);
+            if ((int)TimeCounter % 2 == 1)
+            {
+                LevelSet = false;
+            }
         }
     }
 

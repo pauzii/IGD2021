@@ -130,6 +130,11 @@ public class GameController_G : MiniGame, IPowerUpEvents
         Players.RemoveAt(Players.IndexOf(p));
     }
 
+    public bool GetGamePlaying()
+    {
+        return GamePlaying;
+    }
+
     public void SetPlayerControllersActive(bool b)
     {
         //Disable PlayerController until game starts

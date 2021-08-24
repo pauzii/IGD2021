@@ -25,7 +25,15 @@ public class Demo : MonoBehaviour
 	private bool Player3_AI = true;
 	private bool Player4_AI = true;
 
-	void Start()
+    void Awake()
+    {
+		PlayerPrefs.SetString("Player1_AI", "False");
+		PlayerPrefs.SetString("Player2_AI", "True");
+		PlayerPrefs.SetString("Player3_AI", "True");
+		PlayerPrefs.SetString("Player4_AI", "True");
+	}
+
+    void Start()
 	{
 		Player1_AI = PlayerPrefs.GetString("Player1_AI").Equals("True");
 		Player2_AI = PlayerPrefs.GetString("Player2_AI").Equals("True");
